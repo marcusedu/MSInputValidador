@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
  */
 public class Mask {
     private String mask;
-    private String currencyRegex = "([R$€]{1,3}) #{0,3}([\\.,]?)#{0,3}([\\.,]?)#{0,3}([\\.,]?)#{1,3}";
     private String currencySymbol;
     private String decimalSeparator;
     private String thousands;
@@ -16,6 +15,24 @@ public class Mask {
 
     public Mask(String mask) {
         this.mask = mask;
+        initCurrency();
+    }
+
+    public String applyMask(String text) {
+        if (isCurrency) {
+            return currencyMask(text);
+        } else {
+            return nonCurrencyMask(text);
+        }
+    }
+
+    public String removeMask(String text) {
+        String mask = this.mask.replaceAll("#", "");
+        return text.replaceAll("[" + mask + "]", "").trim();
+    }
+
+    private void initCurrency() {
+        String currencyRegex = "([R$€]{1,3}) #{0,3}([\\.,]?)#{0,3}([\\.,]?)#{0,3}([\\.,]?)#{1,3}";
         Pattern pattern = Pattern.compile(currencyRegex);
         Matcher matcher = pattern.matcher(mask);
         while (matcher.find()) {
@@ -34,24 +51,16 @@ public class Mask {
         }
     }
 
-    public String applyMask(String text) {
-        if (isCurrency) {
-            return currencyMask(text);
-        } else {
-            return nonCurrencyMask(text);
-        }
-    }
-
     private String nonCurrencyMask(String text) {
         String newText = text.replace("#", "§");
-        String res = mask;
+        StringBuilder res = new StringBuilder(mask);
         for (int i = 0; i < newText.length(); i++) {
-            if (res.contains("#")) {
-                res = res.replaceFirst("#", String.valueOf(newText.charAt(i)));
+            if (res.toString().contains("#")) {
+                res = new StringBuilder(res.toString().replaceFirst("#", String.valueOf(newText.charAt(i))));
             } else
-                res += text.charAt(i);
+                res.append(text.charAt(i));
         }
-        return res.split("#")[0].replace("§", "#");
+        return res.toString().split("#")[0].replace("§", "#");
     }
 
     private String currencyMask(String text) {

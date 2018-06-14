@@ -34,6 +34,12 @@ public class MaskTest {
     }
 
     @Test
+    public void deveRemoverFormatacaoCelular() {
+        Mask mask = new Mask("(##)### ### ###");
+        Assert.assertEquals("31996589123", mask.removeMask("(31)996 589 123"));
+    }
+
+    @Test
     public void deveFormatarCelularParcial() {
         Mask mask = new Mask("(##)### ### ###");
         Assert.assertEquals("(31)996 589 ", mask.applyMask("31996589"));
@@ -94,15 +100,21 @@ public class MaskTest {
     }
 
     @Test
+    public void deveRemoverFormatacaoMoeda() {
+        Mask mask = new Mask("R$ #.###,##");
+        Assert.assertEquals("12345678912345678900", mask.removeMask("R$ 123.456.789.123.456.789,00"));
+    }
+
+    @Test
     public void deveFormatarMoedaCentavos1() {
         Mask mask = new Mask("R$ #.###,##");
-        Assert.assertEquals("R$ 0,55",mask.applyMask("55"));
+        Assert.assertEquals("R$ 0,55", mask.applyMask("55"));
     }
 
     @Test
     public void deveFormatarMoedaCentavos2() {
         Mask mask = new Mask("R$ #.###,##");
-        Assert.assertEquals("R$ 0,07",mask.applyMask("07"));
+        Assert.assertEquals("R$ 0,07", mask.applyMask("07"));
     }
 
     @Test
