@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MSEditText">
+        <attr name="groupTag" format="string" />
+        <attr name="customRegex" format="string" />
+        <attr name="messageIfError" format="string" />
+        <attr name="delayInMilli" format="integer" />
+        <attr name="customMask" format="string" />
+        <!--<attr name="regex" format="enum">
+            <enum name="phone1" value="\(?\d{2}\?)9?\d{4}-?\d{4}" />
+            <enum name="cpf" value="###.###.###-##" />
+            <enum name="cnpj" value="##.###.###/####-##" />
+            <enum name="date" value="##/##/####" />
+            <enum name="hour" value="[012]?\d:[0-5]\d" />
+            <enum name="zipCode" value="#####-###" />
+            <enum name="currencyReal" value="R$ #.###,##" />
+        </attr>
+        <attr name="mask" format="enum">
+            <enum name="phone1" value="(##)### ### ###" />
+            <enum name="phone2" value="(##)# ####-####" />
+            <enum name="cpf" value="###.###.###-##" />
+            <enum name="cnpj" value="##.###.###/####-##" />
+            <enum name="date" value="##/##/####" />
+            <enum name="hour" value="##:##" />
+            <enum name="zipCode" value="#####-###" />
+            <enum name="currencyReal" value="R$ #.###,##" />
+        </attr>-->
+    </declare-styleable>
+<!--
+    <declare-styleable name="MSTextInputEditText">
+        <attr name="groupTag" />
+        <attr name="customRegex" />
+        <attr name="messageIfError" />
+        <attr name="customMask" />
+        <attr name="regex" />
+        <attr name="mask" />
+    </declare-styleable>
+
+    <declare-styleable name="MSTextInputLayout">
+        <attr name="groupTag" />
+        <attr name="customRegex" />
+        <attr name="messageIfError" />
+        <attr name="customMask" />
+        <attr name="regex" />
+        <attr name="mask" />
+    </declare-styleable>-->
+</resources>
