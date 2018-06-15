@@ -27,8 +27,11 @@ public class Mask {
     }
 
     public String removeMask(String text) {
-        String mask = this.mask.replaceAll("#", "");
-        return text.replaceAll("[" + mask + "]", "").trim();
+        String mask = this.mask.replaceAll("#", "").replaceAll("-", "\\\\-");
+        if (mask.isEmpty())
+            return text;
+        else
+            return text.replaceAll("[" + mask + "]", "").trim();
     }
 
     private void initCurrency() {
@@ -64,7 +67,7 @@ public class Mask {
     }
 
     private String currencyMask(String text) {
-        String mText = text;
+        String mText = text.replaceAll("^0+","");
         while (mText.length() < 3) mText = "0" + mText;
         String mDecimal = mText.substring(mText.length() - 2, mText.length());
         StringBuilder mInteger = new StringBuilder(mText.substring(0, mText.length() - 2));
